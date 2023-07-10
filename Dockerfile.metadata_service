@@ -3,11 +3,11 @@ FROM python:3.11.4-slim-bookworm
 RUN apt-get update -y \
     && apt-get -y install libpq-dev gcc
 
-ADD services/__init__.py /root/services/
-ADD services/data /root/services/data
-ADD services/utils /root/services/utils
-ADD services/metadata_service /root/services/metadata_service
-ADD setup.py setup.cfg /root/
-WORKDIR /root
+ADD services/__init__.py /metaflow/services/
+ADD services/data /metaflow/services/data
+ADD services/utils /metaflow/services/utils
+ADD services/metadata_service /metaflow/services/metadata_service
+ADD setup.py setup.cfg /metaflow/
+WORKDIR /metaflow
 RUN pip install --editable .
 CMD metadata_service

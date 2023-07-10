@@ -9,8 +9,8 @@ services:
     ports:
       - "${MF_UI_METADATA_PORT:-8083}:${MF_UI_METADATA_PORT:-8083}"
     volumes:
-      - ./services:/root/services
-      - ${HOME}/.aws:/root/.aws
+      - ./services:/metaflow/services
+      - ${HOME}/.aws:/metaflow/.aws
     # Add container capability for benchmarking processes. required for py-spy
     cap_add:
       - SYS_PTRACE
@@ -57,7 +57,7 @@ services:
     ports:
       - "${MF_METADATA_PORT:-8080}:${MF_METADATA_PORT:-8080}"
     volumes:
-      - ./services:/root/services
+      - ./services:/metaflow/services
     environment:
       - MF_METADATA_DB_HOST=db
       - MF_METADATA_DB_PORT=5432
@@ -70,12 +70,12 @@ services:
     depends_on:
       - migration
   migration:
-    command: ["/opt/latest/bin/python3", "/root/run_goose.py"]
+    command: ["/opt/latest/bin/python3", "/metaflow/run_goose.py"]
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./services:/root/services
+      - ./services:/metaflow/services
     environment:
       - MF_METADATA_DB_HOST=db
       - MF_METADATA_DB_PORT=5432

@@ -74,7 +74,7 @@ def main():
         [
             "goose",
             "-dir",
-            "/root/services/migration_service/migration_files/",
+            "/metaflow/services/migration_service/migration_files/",
             "postgres",
             db_connection_string,
             "up",
